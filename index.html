@@ -1,60 +1,44 @@
 <!doctype html5>
 <html lang="en">
     <head>
-        <title>Useful Programming Reference</title>
+        <title>HPR</title>
         <meta charset="utf8">
-        <style>
-            body {
-                font-size: 1.6em;
-            }
-
-            .hidden {
-                display: none;
-            }
-
-            .code {
-                display: inline !important;
-            }
-
-            .redbg {
-                background: #E5a483 !important;
-            }
-
-            button {
-                border: 2px solid black;
-                background: #E5E4E2;
-                font-size: .5em;
-                font-weight: bold;
-                color: black;
-                padding: .8em 2em;
-                margin-top: .4em;
-            }
-        </style>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     </head>
 
     <body>
-        
-        <div class="hidden redbg">
-            <p>Did you just clicked the button?</p>
-        </div>
-
-        <button onClick="showHidden()">Show Hidden Text</button>
-
-        <div class="code">
-                print("hello, world")
-            </p>
-        </div>
+       
+        <pre><code class="python"><p id="textResponse"> </p></code></pre>
         
     <script>
-        function showHidden() {
-            var hiddenElems = document.getElementsByClassName("hidden");
-            for(var elem of hiddenElems)
-                elem.className = elem.className.replace("hidden", "show");
+        // taken from https://plainjs.com/javascript/ajax/making-cors-ajax-get-requests-54/
+        function getCORS(url, success) {
+            var xhr = new XMLHttpRequest();
+            if (!('withCredentials' in xhr)) xhr = new XDomainRequest(); // fix IE8/9
+            xhr.open('GET', url);
+            xhr.overrideMimeType("text/plain; charset=x-user-defined");
+            xhr.onload = success;
+            xhr.send();
+            return xhr;
         }
+// retrieve data unprocessed as a binary string
+// example request
+// read a file and write it to html document
+getCORS('README.md', function(request){
+    var response = request.currentTarget.response || request.target.responseText;
+    //document.write(response);
+    var t = document.createTextNode(response);
+    document.getElementById("textResponse").appendChild(t);
+});
+        //<textarea readonly rows="15" cols="125"></textarea>
+    hljs.initHighlightingOnLoad();
     </script>
     </body>
 
 </html>
+
 
 
 

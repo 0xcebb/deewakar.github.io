@@ -1,0 +1,127 @@
+# Export HTML literally
+
+#+BEGIN_EXPORT html
+<form>
+<input type="text">
+<input type="submit" value="Search">
+</form>
+#+END_EXPORT
+
+#+SETUPFILE: ~/.emacs.d/org-templates/level-0.org
+#+TITLE: Org-mode Basics
+
+<<TOP>>
+
+** Headlines
+
+    Main Headline starts with *, subheadings are created by adding more asterisks.
+
+** Show/Hide contents
+   TAB will cycle local subtree, Shift-TAB cycles through states globally.
+
+** Links to other places
+
+*** Hyperlinks are of the format [[Link] [description]]
+
+    e.g. [[https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html][Org mode tutorial]]
+
+    e.g. [[./other/testfile.org][anther org file]]
+
+*** Internal links are written as [[ target ] ] and dedicated targets are marked with angular brackets <<target>>
+    e.g. go to the TOP [[TOP]]
+
+*** Other external links
+    Files are linked with `file` 
+    e.g. `file:./sample.txt`
+Links can be visited with C-c C-o. [[https://orgmode.org/manual/External-Links.html#External-Links][external links documentation]]
+
+
+
+** Ordered and unordered lists
+*** ordered lists have numbers
+
+1. first
+2. second
+3. third
+
+*** unordered lists start with '-', '+' or '*'
+- blabla
+- foo
+- bar
+
++ baz
++ fizzbuzz
+
+** Blocks
+   Blocks are enclosed inside "#+BEGIN" and "#+END"
+   
+#+BEGIN_SRC elisp
+
+(defun org-xor (a b)
+    "Exclusive or."
+    (if a (not b) b))
+
+#+END_SRC
+
+The source blocks can be edited in native mode with C-c '.
+   
+   
+** Tables
+   
+| field1   | filed2 | field3  |
+|----------+--------+---------|
+| John     |     32 | Teacher |
+| Anna     |     28 | clerk   |
+| Benjamin |     26 | Student |
+
+Press C-c C-c to realign the table automatically
+
+** Images
+#+ATTR_HTML: :width 600px
+#+ATTR_HTML: :height 400px
+[[./zoidy.gif]]
+   
+  toggle inline image view with C-c C-x C-v (org-toggle-inline-images)
+  
+** Math symbols and equations
+*** subscripts with _ and superscripts with ^
+- The speed of light is 3 x 10^8 m/s
+- let f_{0} be the the initial function. 
+
+Toggle WYSISYM mode with C-c C-x \
+
+*** Latex-like symbols
+- The circumference of a circle is given by 2\pi{}r
+- As \alpha \to 0, \gamma \to \infin
+  
+Toggle WYSISYM mode with C-c C-x \
+
+*** Latex fragments
+
+#+HTML_MATHJAX: align: left   
+\begin{align}
+x&=\sqrt{b} \\
+y&=x^2 \\
+\end{align}
+
+*** Inline latex 
+Latex code can be embedded inline by enclosing inside '\( \)' or '\[ \]'
+We're given, \(E = mc^2\) and \(T = 2\pi\sqrt{\frac{l}{g}}\)
+
+
+preview latex fragments on point with C-c C-x C-l
+Note: make sure you have latex (texlive) and dvipng installed
+
+** startup options for per-file settings
+#+STARTUP: inlineimages content hidestars
+
+
+** ORG TODOS
+  Custom todo keywords for this file
+ #+TODO: TODO STARTED | DONE CANCELLED
+*** TODO fix bug #8592
+*** STARTED refactor https code
+*** DONE prepare sane default config
+
+
+

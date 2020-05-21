@@ -1,3 +1,0 @@
-* Welcome to Org mode
-
-** [[file:tutorial.org][Org-mode tutorial]]

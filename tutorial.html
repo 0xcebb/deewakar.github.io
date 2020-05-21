@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-05-21 Thu 21:00 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Org-mode Basics</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Diwakar Wagle" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "left",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Org-mode Basics</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org41b0048">Headlines</a></li>
+<li><a href="#org55ad4ab">Show/Hide contents</a></li>
+<li><a href="#org66233cd">Links to other places</a>
+<ul>
+<li><a href="#orgf41c37d">Hyperlinks are of the format [[Link] [description]]</a></li>
+<li><a href="#org4ac5994">Internal links are written as [[ target ] ] and dedicated targets are marked with angular brackets </a></li>
+<li><a href="#orge21fdda">Other external links</a></li>
+</ul>
+</li>
+<li><a href="#org427bde2">Ordered and unordered lists</a>
+<ul>
+<li><a href="#org31fe04e">ordered lists have numbers</a></li>
+<li><a href="#orgab0a7d1">unordered lists start with '-', '+' or '*'</a></li>
+</ul>
+</li>
+<li><a href="#orgee89926">Blocks</a></li>
+<li><a href="#org079be86">Tables</a></li>
+<li><a href="#org481384e">Images</a></li>
+<li><a href="#org61efe3b">Math symbols and equations</a>
+<ul>
+<li><a href="#orgd899605">subscripts with _ and superscripts with ^</a></li>
+<li><a href="#orgd3e510f">Latex-like symbols</a></li>
+<li><a href="#orgcc72b47">Latex fragments</a></li>
+<li><a href="#orga97398c">Inline latex</a></li>
+</ul>
+</li>
+<li><a href="#org86cc77d">startup options for per-file settings</a></li>
+<li><a href="#orgdde6fb1">ORG TODOS</a>
+<ul>
+<li><a href="#orgbda2cf5"><span class="todo TODO">TODO</span> fix bug #8592</a></li>
+<li><a href="#org2302aa2"><span class="todo STARTED">STARTED</span> refactor https code</a></li>
+<li><a href="#org7e72fba"><span class="done DONE">DONE</span> prepare sane default config</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<form>
+<input type="text">
+<input type="submit" value="Search">
+</form>
+
+<p>
+<a id="orgf88e8a2"></a>
+</p>
+
+<div id="outline-container-org41b0048" class="outline-2">
+<h2 id="org41b0048">Headlines</h2>
+<div class="outline-text-2" id="text-org41b0048">
+<p>
+Main Headline starts with *, subheadings are created by adding more asterisks.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org55ad4ab" class="outline-2">
+<h2 id="org55ad4ab">Show/Hide contents</h2>
+<div class="outline-text-2" id="text-org55ad4ab">
+<p>
+TAB will cycle local subtree, Shift-TAB cycles through states globally.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org66233cd" class="outline-2">
+<h2 id="org66233cd">Links to other places</h2>
+<div class="outline-text-2" id="text-org66233cd">
+</div>
+<div id="outline-container-orgf41c37d" class="outline-3">
+<h3 id="orgf41c37d">Hyperlinks are of the format [[Link] [description]]</h3>
+<div class="outline-text-3" id="text-orgf41c37d">
+<p>
+e.g. <a href="https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html">Org mode tutorial</a>
+</p>
+
+<p>
+e.g. <a href="./other/testfile.html">anther org file</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4ac5994" class="outline-3">
+<h3 id="org4ac5994">Internal links are written as [[ target ] ] and dedicated targets are marked with angular brackets <a id="org62b2933"></a></h3>
+<div class="outline-text-3" id="text-org4ac5994">
+<p>
+e.g. go to the TOP <a href="#orgf88e8a2">No description for this link</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge21fdda" class="outline-3">
+<h3 id="orge21fdda">Other external links</h3>
+<div class="outline-text-3" id="text-orge21fdda">
+<p>
+    Files are linked with `file` 
+    e.g. `<a href="./sample.txt">./sample.txt</a>`
+Links can be visited with C-c C-o. <a href="https://orgmode.org/manual/External-Links.html#External-Links">external links documentation</a>
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org427bde2" class="outline-2">
+<h2 id="org427bde2">Ordered and unordered lists</h2>
+<div class="outline-text-2" id="text-org427bde2">
+</div>
+<div id="outline-container-org31fe04e" class="outline-3">
+<h3 id="org31fe04e">ordered lists have numbers</h3>
+<div class="outline-text-3" id="text-org31fe04e">
+<ol class="org-ol">
+<li>first</li>
+<li>second</li>
+<li>third</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgab0a7d1" class="outline-3">
+<h3 id="orgab0a7d1">unordered lists start with '-', '+' or '*'</h3>
+<div class="outline-text-3" id="text-orgab0a7d1">
+<ul class="org-ul">
+<li>blabla</li>
+<li>foo</li>
+<li>bar</li>
+
+<li>baz</li>
+<li>fizzbuzz</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgee89926" class="outline-2">
+<h2 id="orgee89926">Blocks</h2>
+<div class="outline-text-2" id="text-orgee89926">
+<p>
+Blocks are enclosed inside "#+BEGIN" and "#+END"
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">
+(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a;">org-xor</span> (a b)
+    <span style="color: #ffa500;">"Exclusive or."</span>
+    (<span style="color: #00ffff;">if</span> a (not b) b))
+
+</pre>
+</div>
+
+<p>
+The source blocks can be edited in native mode with C-c '.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org079be86" class="outline-2">
+<h2 id="org079be86">Tables</h2>
+<div class="outline-text-2" id="text-org079be86">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">field1</th>
+<th scope="col" class="org-right">filed2</th>
+<th scope="col" class="org-left">field3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">John</td>
+<td class="org-right">32</td>
+<td class="org-left">Teacher</td>
+</tr>
+
+<tr>
+<td class="org-left">Anna</td>
+<td class="org-right">28</td>
+<td class="org-left">clerk</td>
+</tr>
+
+<tr>
+<td class="org-left">Benjamin</td>
+<td class="org-right">26</td>
+<td class="org-left">Student</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Press C-c C-c to realign the table automatically
+</p>
+</div>
+</div>
+
+<div id="outline-container-org481384e" class="outline-2">
+<h2 id="org481384e">Images</h2>
+<div class="outline-text-2" id="text-org481384e">
+
+<div class="figure">
+<p><img src="./images/zoidy.gif" alt="zoidy.gif" height="400px" width="600px" />
+</p>
+</div>
+
+<p>
+toggle inline image view with C-c C-x C-v (org-toggle-inline-images)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org61efe3b" class="outline-2">
+<h2 id="org61efe3b">Math symbols and equations</h2>
+<div class="outline-text-2" id="text-org61efe3b">
+</div>
+<div id="outline-container-orgd899605" class="outline-3">
+<h3 id="orgd899605">subscripts with _ and superscripts with ^</h3>
+<div class="outline-text-3" id="text-orgd899605">
+<ul class="org-ul">
+<li>The speed of light is 3 x 10<sup>8</sup> m/s</li>
+<li>let f<sub>0</sub> be the the initial function.</li>
+</ul>
+
+<p>
+Toggle WYSISYM mode with C-c C-x \
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd3e510f" class="outline-3">
+<h3 id="orgd3e510f">Latex-like symbols</h3>
+<div class="outline-text-3" id="text-orgd3e510f">
+<ul class="org-ul">
+<li>The circumference of a circle is given by 2&pi;r</li>
+<li>As &alpha; &rarr; 0, &gamma; &rarr; &infin;</li>
+</ul>
+
+<p>
+Toggle WYSISYM mode with C-c C-x \
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcc72b47" class="outline-3">
+<h3 id="orgcc72b47">Latex fragments</h3>
+<div class="outline-text-3" id="text-orgcc72b47">
+\begin{align}
+x&=\sqrt{b} \\
+y&=x^2 \\
+\end{align}
+</div>
+</div>
+
+<div id="outline-container-orga97398c" class="outline-3">
+<h3 id="orga97398c">Inline latex</h3>
+<div class="outline-text-3" id="text-orga97398c">
+<p>
+Latex code can be embedded inline by enclosing inside '\( \)' or '\[ \]'
+We're given, \(E = mc^2\) and \(T = 2\pi\sqrt{\frac{l}{g}}\)
+</p>
+
+
+<p>
+preview latex fragments on point with C-c C-x C-l
+Note: make sure you have latex (texlive) and dvipng installed
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org86cc77d" class="outline-2">
+<h2 id="org86cc77d">startup options for per-file settings</h2>
+<div class="outline-text-2" id="text-org86cc77d">
+</div>
+</div>
+
+
+<div id="outline-container-orgdde6fb1" class="outline-2">
+<h2 id="orgdde6fb1">ORG TODOS</h2>
+<div class="outline-text-2" id="text-orgdde6fb1">
+<p>
+Custom todo keywords for this file
+</p>
+</div>
+<div id="outline-container-orgbda2cf5" class="outline-3">
+<h3 id="orgbda2cf5"><span class="todo TODO">TODO</span> fix bug #8592</h3>
+</div>
+<div id="outline-container-org2302aa2" class="outline-3">
+<h3 id="org2302aa2"><span class="todo STARTED">STARTED</span> refactor https code</h3>
+</div>
+<div id="outline-container-org7e72fba" class="outline-3">
+<h3 id="org7e72fba"><span class="done DONE">DONE</span> prepare sane default config</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Diwakar Wagle</p>
+<p class="date">Created: 2020-05-21 Thu 21:00</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

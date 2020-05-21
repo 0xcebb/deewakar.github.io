@@ -1,6 +1,0 @@
-#+TITLE: Sitemap
-
-- [[file:index.org][index]]
-- [[file:tutorial.org][tutorial]]
-- other
-  - [[file:other/testfile.org][Another org file]]

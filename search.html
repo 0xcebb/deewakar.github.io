@@ -6,7 +6,7 @@
 <!-- 2020-05-30 Sat 18:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sitemap</title>
+<title>Search Results</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Diwakar Wagle" />
 <style type="text/css">
@@ -180,6 +180,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -229,16 +230,69 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Sitemap</h1>
-<ul class="org-ul">
-<li><a href="tutorial.html">Org-mode Basics</a></li>
-<li><a href="search.html">Search Results</a></li>
-<li><a href="index.html">index</a></li>
-<li>other
-<ul class="org-ul">
-<li><a href="other/testfile.html">Another org file</a></li>
-</ul></li>
-</ul>
+<h1 class="title">Search Results</h1>
+<div id="results">
+
+</div>
+
+<script type="text/javascript"> 
+var data = undefined;
+var keyword = undefined;
+const results = document.querySelector("#results");
+
+function loadResults(keyword) {
+    fetch("index.json")
+    .then(response => response.json())
+    .then(json => filterMatches(json)) 
+    .then(gen => {
+    let resObj = gen.next(); 
+    while(!resObj.done){
+           addResultItem(resObj.value);
+	   resObj = gen.next();
+    }})
+    .catch(e => console.log("couldn't fetch index.json: " + e));
+   
+}
+
+function updateTitle() {
+    let title = document.querySelector(".title");
+    let params = new URLSearchParams(document.location.search);
+    keyword = params.get("q");
+    title.innerText = `Search Results for '${keyword}'`;
+}
+
+function* filterMatches(arr) {
+    let regex = new RegExp(`${keyword}`, 'i');
+    for(var e of arr) {
+        if(e.text.match(regex))
+            yield e;
+    }
+}
+
+/* Returns a couple of sentences from the paragraph under the provided link */
+function getDescription(link) {
+    let para = document.getElementById(`text-org${link}`);
+    return para.innerText;
+}
+
+function addResultItem(obj) {
+    let htmlString = `
+<div style="background-color: gold; font-size: 22px; text-align: center">
+<p><span style="color: #0162fa"><a href=${obj.url}><strong>${obj.text}</strong></a></span> in <em>${obj.title}</em></p>
+<iframe scrolling="no" src="${obj.url}" style="border: 1px none; height: 99%; width: 99%; margin: 2px 2px"> 
+</iframe> 
+</div>`;
+    results.insertAdjacentHTML('beforeend', htmlString);
+}
+ 
+
+function main() {
+    updateTitle();
+    loadResults();
+}
+
+document.body.onload = main;
+</script>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Diwakar Wagle</p>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-05-21 Thu 21:00 -->
+<!-- 2020-05-30 Sat 18:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Org-mode Basics</title>
@@ -186,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2018 Free Software Foundation, Inc.
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -294,11 +294,30 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<form>
-<input type="text">
-<input type="submit" value="Search">
-</form>
+<form id="form">
+  <label for="search">Search </label>
+  <input type="text" id="search" required>
 
+  <button type="submit">Submit</button>
+</form>
+<script type="text/javascript">
+const form = document.getElementById('form');
+const search = document.getElementById('search');
+
+form.onsubmit = submit;
+
+function invalid(event) {
+  alert("search field was empty!");
+}
+
+function submit(event) {
+  //form.setAttribute('hidden', '');
+  window.location.href = `/search.html?q=${search.value}`;
+
+  // For this example, don't actually submit the form
+  event.preventDefault();
+}
+</script>
 <p>
 <a id="orgf88e8a2"></a>
 </p>
@@ -400,9 +419,9 @@ Blocks are enclosed inside "#+BEGIN" and "#+END"
 
 <div class="org-src-container">
 <pre class="src src-elisp">
-(<span style="color: #00ffff;">defun</span> <span style="color: #00fa9a;">org-xor</span> (a b)
-    <span style="color: #ffa500;">"Exclusive or."</span>
-    (<span style="color: #00ffff;">if</span> a (not b) b))
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-xor</span> (a b)
+    <span class="org-doc">"Exclusive or."</span>
+    (<span class="org-keyword">if</span> a (not b) b))
 
 </pre>
 </div>
@@ -522,9 +541,11 @@ y&=x^2 \\
 <h3 id="orga97398c">Inline latex</h3>
 <div class="outline-text-3" id="text-orga97398c">
 <p>
-Latex code can be embedded inline by enclosing inside '\( \)' or '\[ \]'
-We're given, \(E = mc^2\) and \(T = 2\pi\sqrt{\frac{l}{g}}\)
+Latex code can be embedded inline by enclosing inside \​( and \) or \​[ and \]
 </p>
+<ul class="org-ul">
+<li>We're given, \(E = mc^2\) and \(T = 2\pi\sqrt{\frac{l}{g}}\)</li>
+</ul>
 
 
 <p>
@@ -562,7 +583,7 @@ Custom todo keywords for this file
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Diwakar Wagle</p>
-<p class="date">Created: 2020-05-21 Thu 21:00</p>
+<p class="date">Created: 2020-05-30 Sat 18:44</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
